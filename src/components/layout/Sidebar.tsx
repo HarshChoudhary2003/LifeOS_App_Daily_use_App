@@ -14,6 +14,7 @@ import {
   BarChart3,
   Sparkles,
   Users,
+  Heart,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -22,6 +23,7 @@ const navItems = [
   { to: '/tasks', icon: CheckSquare, label: 'Tasks' },
   { to: '/habits', icon: Target, label: 'Habits' },
   { to: '/expenses', icon: DollarSign, label: 'Expenses' },
+  { to: '/wellness', icon: Heart, label: 'Wellness' },
   { to: '/analytics', icon: BarChart3, label: 'Analytics' },
   { to: '/coach', icon: Sparkles, label: 'AI Coach' },
   { to: '/teams', icon: Users, label: 'Teams' },
