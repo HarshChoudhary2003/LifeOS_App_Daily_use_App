@@ -148,6 +148,36 @@ export type Database = {
         }
         Relationships: []
       }
+      mood_logs: {
+        Row: {
+          created_at: string
+          energy: number
+          id: string
+          logged_at: string
+          mood: number
+          note: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          energy: number
+          id?: string
+          logged_at?: string
+          mood: number
+          note?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          energy?: number
+          id?: string
+          logged_at?: string
+          mood?: number
+          note?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       notes: {
         Row: {
           content: string | null
@@ -241,6 +271,33 @@ export type Database = {
           updated_at?: string
           user_id?: string
           username?: string | null
+        }
+        Relationships: []
+      }
+      reflections: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          logged_at: string
+          prompt: string | null
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          logged_at?: string
+          prompt?: string | null
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          logged_at?: string
+          prompt?: string | null
+          user_id?: string
         }
         Relationships: []
       }

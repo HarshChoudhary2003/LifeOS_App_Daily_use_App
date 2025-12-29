@@ -5,15 +5,15 @@ import {
   CheckSquare,
   DollarSign,
   Sparkles,
-  BarChart3,
+  Heart,
 } from 'lucide-react';
 
 const navItems = [
   { to: '/dashboard', icon: LayoutDashboard, label: 'Home' },
   { to: '/tasks', icon: CheckSquare, label: 'Tasks' },
+  { to: '/wellness', icon: Heart, label: 'Wellness' },
   { to: '/coach', icon: Sparkles, label: 'Coach' },
   { to: '/expenses', icon: DollarSign, label: 'Money' },
-  { to: '/analytics', icon: BarChart3, label: 'Stats' },
 ];
 
 export function MobileNav() {
