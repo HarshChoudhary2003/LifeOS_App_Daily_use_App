@@ -12,6 +12,7 @@ import {
   Brain,
   Target,
   BarChart3,
+  Sparkles,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -21,6 +22,7 @@ const navItems = [
   { to: '/habits', icon: Target, label: 'Habits' },
   { to: '/expenses', icon: DollarSign, label: 'Expenses' },
   { to: '/analytics', icon: BarChart3, label: 'Analytics' },
+  { to: '/coach', icon: Sparkles, label: 'AI Coach' },
   { to: '/decisions', icon: Scale, label: 'Decisions' },
   { to: '/notes', icon: FileText, label: 'Notes' },
   { to: '/settings', icon: Settings, label: 'Settings' },
