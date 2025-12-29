@@ -202,6 +202,130 @@ export type Database = {
         }
         Relationships: []
       }
+      public_profiles: {
+        Row: {
+          bio: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          is_public: boolean | null
+          show_expense_summary: boolean | null
+          show_habit_streaks: boolean | null
+          show_task_stats: boolean | null
+          updated_at: string
+          user_id: string
+          username: string | null
+        }
+        Insert: {
+          bio?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          is_public?: boolean | null
+          show_expense_summary?: boolean | null
+          show_habit_streaks?: boolean | null
+          show_task_stats?: boolean | null
+          updated_at?: string
+          user_id: string
+          username?: string | null
+        }
+        Update: {
+          bio?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          is_public?: boolean | null
+          show_expense_summary?: boolean | null
+          show_habit_streaks?: boolean | null
+          show_task_stats?: boolean | null
+          updated_at?: string
+          user_id?: string
+          username?: string | null
+        }
+        Relationships: []
+      }
+      shared_expenses: {
+        Row: {
+          amount: number
+          category: string
+          created_at: string
+          id: string
+          note: string | null
+          paid_by: string
+          team_id: string
+        }
+        Insert: {
+          amount: number
+          category: string
+          created_at?: string
+          id?: string
+          note?: string | null
+          paid_by: string
+          team_id: string
+        }
+        Update: {
+          amount?: number
+          category?: string
+          created_at?: string
+          id?: string
+          note?: string | null
+          paid_by?: string
+          team_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "shared_expenses_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      shared_tasks: {
+        Row: {
+          assigned_to: string | null
+          category: string | null
+          created_at: string
+          created_by: string
+          id: string
+          status: string | null
+          team_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          category?: string | null
+          created_at?: string
+          created_by: string
+          id?: string
+          status?: string | null
+          team_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          assigned_to?: string | null
+          category?: string | null
+          created_at?: string
+          created_by?: string
+          id?: string
+          status?: string | null
+          team_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "shared_tasks_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tasks: {
         Row: {
           category: string
@@ -229,6 +353,68 @@ export type Database = {
           title?: string
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      team_members: {
+        Row: {
+          id: string
+          joined_at: string
+          role: string | null
+          team_id: string
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          joined_at?: string
+          role?: string | null
+          team_id: string
+          user_id: string
+        }
+        Update: {
+          id?: string
+          joined_at?: string
+          role?: string | null
+          team_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "team_members_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      teams: {
+        Row: {
+          created_at: string
+          created_by: string
+          description: string | null
+          id: string
+          invite_code: string | null
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          description?: string | null
+          id?: string
+          invite_code?: string | null
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          description?: string | null
+          id?: string
+          invite_code?: string | null
+          name?: string
+          updated_at?: string
         }
         Relationships: []
       }

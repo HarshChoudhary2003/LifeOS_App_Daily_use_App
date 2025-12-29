@@ -17,6 +17,8 @@ import Analytics from "./pages/Analytics";
 import Notes from "./pages/Notes";
 import Decisions from "./pages/Decisions";
 import LifeCoach from "./pages/LifeCoach";
+import Teams from "./pages/Teams";
+import PublicProfile from "./pages/PublicProfile";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
@@ -104,6 +106,15 @@ const App = () => (
                 </AppLayout>
               }
             />
+            <Route
+              path="/teams"
+              element={
+                <AppLayout>
+                  <Teams />
+                </AppLayout>
+              }
+            />
+            <Route path="/u/:username" element={<PublicProfile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
