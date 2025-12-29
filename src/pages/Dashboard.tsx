@@ -7,6 +7,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { CategoryBadge } from '@/components/ui/category-badge';
+import { WeeklySummary } from '@/components/dashboard/WeeklySummary';
+import { HabitStreaks } from '@/components/dashboard/HabitStreaks';
+import { SmartInsight } from '@/components/dashboard/SmartInsight';
+import { SmartNotifications } from '@/components/dashboard/SmartNotifications';
 import { 
   CheckSquare, 
   DollarSign, 
@@ -103,6 +107,9 @@ export default function Dashboard() {
         description="Here's your daily overview"
       />
 
+      {/* Smart Notifications */}
+      <SmartNotifications />
+
       {/* Focus Message */}
       <Card className="glass-card overflow-hidden">
         <CardContent className="p-6">
@@ -117,6 +124,15 @@ export default function Dashboard() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Smart Insight */}
+      <SmartInsight />
+
+      {/* Weekly Summary + Habits Row */}
+      <div className="grid gap-4 md:grid-cols-2">
+        <WeeklySummary />
+        <HabitStreaks />
+      </div>
 
       <div className="grid gap-4 md:grid-cols-2">
         {/* Tasks Overview */}

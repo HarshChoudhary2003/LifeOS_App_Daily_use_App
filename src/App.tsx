@@ -11,7 +11,9 @@ import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Tasks from "./pages/Tasks";
+import Habits from "./pages/Habits";
 import Expenses from "./pages/Expenses";
+import Analytics from "./pages/Analytics";
 import Notes from "./pages/Notes";
 import Decisions from "./pages/Decisions";
 import Settings from "./pages/Settings";
@@ -46,10 +48,26 @@ const App = () => (
               }
             />
             <Route
+              path="/habits"
+              element={
+                <AppLayout>
+                  <Habits />
+                </AppLayout>
+              }
+            />
+            <Route
               path="/expenses"
               element={
                 <AppLayout>
                   <Expenses />
+                </AppLayout>
+              }
+            />
+            <Route
+              path="/analytics"
+              element={
+                <AppLayout>
+                  <Analytics />
                 </AppLayout>
               }
             />
