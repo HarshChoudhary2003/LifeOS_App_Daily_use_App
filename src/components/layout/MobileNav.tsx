@@ -4,16 +4,16 @@ import {
   LayoutDashboard,
   CheckSquare,
   DollarSign,
-  Scale,
-  FileText,
+  Target,
+  BarChart3,
 } from 'lucide-react';
 
 const navItems = [
   { to: '/dashboard', icon: LayoutDashboard, label: 'Home' },
   { to: '/tasks', icon: CheckSquare, label: 'Tasks' },
+  { to: '/habits', icon: Target, label: 'Habits' },
   { to: '/expenses', icon: DollarSign, label: 'Money' },
-  { to: '/decisions', icon: Scale, label: 'Decide' },
-  { to: '/notes', icon: FileText, label: 'Notes' },
+  { to: '/analytics', icon: BarChart3, label: 'Stats' },
 ];
 
 export function MobileNav() {

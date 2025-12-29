@@ -10,13 +10,17 @@ import {
   Settings,
   LogOut,
   Brain,
+  Target,
+  BarChart3,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const navItems = [
   { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
   { to: '/tasks', icon: CheckSquare, label: 'Tasks' },
+  { to: '/habits', icon: Target, label: 'Habits' },
   { to: '/expenses', icon: DollarSign, label: 'Expenses' },
+  { to: '/analytics', icon: BarChart3, label: 'Analytics' },
   { to: '/decisions', icon: Scale, label: 'Decisions' },
   { to: '/notes', icon: FileText, label: 'Notes' },
   { to: '/settings', icon: Settings, label: 'Settings' },
