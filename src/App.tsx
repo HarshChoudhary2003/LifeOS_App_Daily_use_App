@@ -16,6 +16,7 @@ import Expenses from "./pages/Expenses";
 import Analytics from "./pages/Analytics";
 import Notes from "./pages/Notes";
 import Decisions from "./pages/Decisions";
+import LifeCoach from "./pages/LifeCoach";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
@@ -84,6 +85,14 @@ const App = () => (
               element={
                 <AppLayout>
                   <Decisions />
+                </AppLayout>
+              }
+            />
+            <Route
+              path="/coach"
+              element={
+                <AppLayout>
+                  <LifeCoach />
                 </AppLayout>
               }
             />
