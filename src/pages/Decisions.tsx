@@ -116,37 +116,38 @@ export default function Decisions() {
   }
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-4 sm:space-y-6 animate-fade-in">
       <PageHeader
         title="Decisions"
-        description="Get clarity on important choices"
+        description="Think through what matters"
         action={
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <DialogTrigger asChild>
-              <Button>
+              <Button className="w-full sm:w-auto">
                 <Plus className="mr-2 h-4 w-4" />
-                New Decision
+                <span className="hidden sm:inline">New Decision</span>
+                <span className="sm:hidden">Add</span>
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-lg">
+            <DialogContent>
               <DialogHeader>
-                <DialogTitle>Analyze a Decision</DialogTitle>
+                <DialogTitle>What are you deciding?</DialogTitle>
               </DialogHeader>
               <div className="space-y-4 pt-4">
                 <div className="space-y-2">
-                  <Label htmlFor="question">What decision are you thinking about?</Label>
+                  <Label htmlFor="question">Your question</Label>
                   <Input
                     id="question"
-                    placeholder="e.g., Should I change careers?"
+                    placeholder="e.g., Should I take this new job?"
                     value={formData.question}
                     onChange={(e) => setFormData({ ...formData, question: e.target.value })}
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="context">Additional context (optional)</Label>
+                  <Label htmlFor="context">Context (optional)</Label>
                   <Textarea
                     id="context"
-                    placeholder="Any relevant details or constraints..."
+                    placeholder="What's the situation? What matters most to you?"
                     value={formData.context}
                     onChange={(e) => setFormData({ ...formData, context: e.target.value })}
                     rows={3}
@@ -154,7 +155,7 @@ export default function Decisions() {
                 </div>
                 <Button onClick={analyzeDecision} className="w-full" disabled={analyzing}>
                   {analyzing && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                  {analyzing ? 'Analyzing...' : 'Analyze Decision'}
+                  {analyzing ? 'Thinking...' : 'Help Me Decide'}
                 </Button>
               </div>
             </DialogContent>
@@ -251,12 +252,12 @@ export default function Decisions() {
       ) : (
         <EmptyState
           icon={Scale}
-          title="No decisions yet"
-          description="Get help analyzing important life decisions"
+          title="Big choice ahead?"
+          description="Break it down. See the pros and cons clearly."
           action={
-            <Button onClick={() => setDialogOpen(true)}>
+            <Button onClick={() => setDialogOpen(true)} className="w-full sm:w-auto">
               <Plus className="mr-2 h-4 w-4" />
-              New Decision
+              Think Through a Decision
             </Button>
           }
         />
