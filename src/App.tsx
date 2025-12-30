@@ -20,6 +20,8 @@ import LifeCoach from "./pages/LifeCoach";
 import Wellness from "./pages/Wellness";
 import Time from "./pages/Time";
 import Learning from "./pages/Learning";
+import Automation from "./pages/Automation";
+import LifeVision from "./pages/LifeVision";
 import Teams from "./pages/Teams";
 import PublicProfile from "./pages/PublicProfile";
 import Settings from "./pages/Settings";
@@ -122,6 +124,22 @@ const App = () => (
               element={
                 <AppLayout>
                   <Learning />
+                </AppLayout>
+              }
+            />
+            <Route
+              path="/automation"
+              element={
+                <AppLayout>
+                  <Automation />
+                </AppLayout>
+              }
+            />
+            <Route
+              path="/vision"
+              element={
+                <AppLayout>
+                  <LifeVision />
                 </AppLayout>
               }
             />

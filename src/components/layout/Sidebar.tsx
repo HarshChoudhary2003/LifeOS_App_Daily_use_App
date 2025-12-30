@@ -17,6 +17,8 @@ import {
   Heart,
   Clock,
   GraduationCap,
+  Zap,
+  Compass,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -28,6 +30,8 @@ const navItems = [
   { to: '/wellness', icon: Heart, label: 'Wellness' },
   { to: '/time', icon: Clock, label: 'Time' },
   { to: '/learning', icon: GraduationCap, label: 'Learning' },
+  { to: '/automation', icon: Zap, label: 'Automation' },
+  { to: '/vision', icon: Compass, label: 'Life Vision' },
   { to: '/analytics', icon: BarChart3, label: 'Analytics' },
   { to: '/coach', icon: Sparkles, label: 'AI Coach' },
   { to: '/teams', icon: Users, label: 'Teams' },

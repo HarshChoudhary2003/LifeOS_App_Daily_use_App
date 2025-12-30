@@ -12,7 +12,8 @@ serve(async (req) => {
   }
 
   try {
-    const { message, conversationHistory } = await req.json();
+    const body = await req.json();
+    const { action, message, conversationHistory, vision, values } = body;
     
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {
@@ -32,6 +33,64 @@ serve(async (req) => {
       global: { headers: { Authorization: authHeader } },
     });
 
+    // Handle alignment check action
+    if (action === 'alignment') {
+      const [habitsRes, tasksRes, decisionsRes, moodRes] = await Promise.all([
+        supabase.from('habit_logs').select('*, habits(name)').order('completed_at', { ascending: false }).limit(10),
+        supabase.from('tasks').select('*').order('updated_at', { ascending: false }).limit(10),
+        supabase.from('decisions').select('*').order('created_at', { ascending: false }).limit(5),
+        supabase.from('mood_logs').select('*').order('logged_at', { ascending: false }).limit(7),
+      ]);
+
+      const recentHabits = habitsRes.data?.map((h: any) => h.habits?.name).filter(Boolean) || [];
+      const completedTasks = tasksRes.data?.filter((t: any) => t.status === 'done').map((t: any) => t.title) || [];
+      const pendingTasks = tasksRes.data?.filter((t: any) => t.status === 'pending').map((t: any) => t.title) || [];
+      const recentDecisions = decisionsRes.data?.map((d: any) => d.question) || [];
+      const avgMood = moodRes.data?.length 
+        ? (moodRes.data.reduce((acc: number, m: any) => acc + m.mood, 0) / moodRes.data.length).toFixed(1) 
+        : 'N/A';
+
+      const prompt = `You are a compassionate life coach helping someone align their daily actions with their future vision.
+
+Their future vision: "${vision}"
+Their core values: ${values?.join(', ') || 'Not specified'}
+
+Recent activity:
+- Habits practiced: ${recentHabits.join(', ') || 'None recorded'}
+- Completed tasks: ${completedTasks.slice(0, 5).join(', ') || 'None'}
+- Pending tasks: ${pendingTasks.slice(0, 5).join(', ') || 'None'}
+- Recent decisions being considered: ${recentDecisions.join('; ') || 'None'}
+- Average mood (1-5): ${avgMood}
+
+Provide a brief, encouraging analysis (2-3 paragraphs) of how well their recent actions align with their vision. Be specific but kind. Highlight what's going well and gently suggest one or two areas for improvement. End with an encouraging note. Don't be preachy or judgmental.`;
+
+      const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${LOVABLE_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'google/gemini-2.5-flash',
+          messages: [{ role: 'user', content: prompt }],
+        }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('AI gateway error:', response.status, errorText);
+        throw new Error('Failed to get AI response');
+      }
+
+      const data = await response.json();
+      const aiResponse = data.choices?.[0]?.message?.content || 'Unable to generate alignment check.';
+
+      return new Response(JSON.stringify({ response: aiResponse }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Default: Chat mode
     // Fetch user's data for context
     const [tasksRes, habitsRes, habitLogsRes, expensesRes, decisionsRes] = await Promise.all([
       supabase.from("tasks").select("*").order("created_at", { ascending: false }).limit(50),
