@@ -16,9 +16,10 @@ import {
 } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Plus, FileText, Search, Trash2, Pencil } from 'lucide-react';
+import { Plus, FileText, Search, Trash2, Pencil, Link2 } from 'lucide-react';
 import { format } from 'date-fns';
-
+import { NoteLinking } from '@/components/notes/NoteLinking';
+import { KnowledgeRecall } from '@/components/knowledge/KnowledgeRecall';
 interface Note {
   id: string;
   title: string;
@@ -160,6 +161,11 @@ export default function Notes() {
                     className="resize-none"
                   />
                 </div>
+                {editingNote && (
+                  <div className="border-t pt-4">
+                    <NoteLinking noteId={editingNote.id} />
+                  </div>
+                )}
                 <Button onClick={saveNote} className="w-full">
                   {editingNote ? 'Update Note' : 'Create Note'}
                 </Button>
@@ -258,6 +264,9 @@ export default function Notes() {
           }
         />
       )}
+
+      {/* AI Knowledge Recall */}
+      {notes.length > 0 && <KnowledgeRecall />}
     </div>
   );
 }
