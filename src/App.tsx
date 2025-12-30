@@ -19,6 +19,7 @@ import Decisions from "./pages/Decisions";
 import LifeCoach from "./pages/LifeCoach";
 import Wellness from "./pages/Wellness";
 import Time from "./pages/Time";
+import Learning from "./pages/Learning";
 import Teams from "./pages/Teams";
 import PublicProfile from "./pages/PublicProfile";
 import Settings from "./pages/Settings";
@@ -113,6 +114,14 @@ const App = () => (
               element={
                 <AppLayout>
                   <Time />
+                </AppLayout>
+              }
+            />
+            <Route
+              path="/learning"
+              element={
+                <AppLayout>
+                  <Learning />
                 </AppLayout>
               }
             />

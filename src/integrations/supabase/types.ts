@@ -192,6 +192,42 @@ export type Database = {
         }
         Relationships: []
       }
+      learning_goals: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          progress: number
+          status: string
+          target_date: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          progress?: number
+          status?: string
+          target_date?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          progress?: number
+          status?: string
+          target_date?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       mood_logs: {
         Row: {
           created_at: string
@@ -221,6 +257,41 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      note_links: {
+        Row: {
+          created_at: string
+          id: string
+          linked_id: string
+          linked_type: string
+          note_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          linked_id: string
+          linked_type: string
+          note_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          linked_id?: string
+          linked_type?: string
+          note_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "note_links_note_id_fkey"
+            columns: ["note_id"]
+            isOneToOne: false
+            referencedRelation: "notes"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       notes: {
         Row: {

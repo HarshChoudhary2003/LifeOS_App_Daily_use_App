@@ -11,6 +11,7 @@ import { WeeklySummary } from '@/components/dashboard/WeeklySummary';
 import { HabitStreaks } from '@/components/dashboard/HabitStreaks';
 import { SmartInsight } from '@/components/dashboard/SmartInsight';
 import { SmartNotifications } from '@/components/dashboard/SmartNotifications';
+import { LearningProgress } from '@/components/dashboard/LearningProgress';
 import { 
   CheckSquare, 
   DollarSign, 
@@ -128,10 +129,11 @@ export default function Dashboard() {
       {/* Smart Insight */}
       <SmartInsight />
 
-      {/* Weekly Summary + Habits Row */}
-      <div className="grid gap-4 md:grid-cols-2">
+      {/* Weekly Summary + Habits + Learning Row */}
+      <div className="grid gap-4 md:grid-cols-3">
         <WeeklySummary />
         <HabitStreaks />
+        <LearningProgress />
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">

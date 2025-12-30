@@ -3,16 +3,15 @@ import { cn } from '@/lib/utils';
 import {
   LayoutDashboard,
   CheckSquare,
-  DollarSign,
   Sparkles,
   Heart,
-  Clock,
+  GraduationCap,
 } from 'lucide-react';
 
 const navItems = [
   { to: '/dashboard', icon: LayoutDashboard, label: 'Home' },
   { to: '/tasks', icon: CheckSquare, label: 'Tasks' },
-  { to: '/time', icon: Clock, label: 'Time' },
+  { to: '/learning', icon: GraduationCap, label: 'Learn' },
   { to: '/wellness', icon: Heart, label: 'Wellness' },
   { to: '/coach', icon: Sparkles, label: 'Coach' },
 ];

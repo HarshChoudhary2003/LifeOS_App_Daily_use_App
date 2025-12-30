@@ -1,1 +1,7 @@
 project_id = "bdtywzrhvjreggkhcfaz"
+
+[functions.life-coach]
+verify_jwt = true
+
+[functions.knowledge-recall]
+verify_jwt = true
