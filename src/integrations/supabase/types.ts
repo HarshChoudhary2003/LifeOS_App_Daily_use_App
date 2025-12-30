@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      automation_rules: {
+        Row: {
+          action_config: Json | null
+          action_type: string
+          created_at: string
+          id: string
+          is_active: boolean
+          name: string
+          trigger_config: Json | null
+          trigger_type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          action_config?: Json | null
+          action_type: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name: string
+          trigger_config?: Json | null
+          trigger_type: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          action_config?: Json | null
+          action_type?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          trigger_config?: Json | null
+          trigger_type?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       decisions: {
         Row: {
           cons: string[] | null
@@ -124,6 +163,39 @@ export type Database = {
           },
         ]
       }
+      future_vision: {
+        Row: {
+          created_at: string
+          id: string
+          ideal_routines: Json | null
+          target_year: number | null
+          updated_at: string
+          user_id: string
+          values: string[] | null
+          vision_text: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          ideal_routines?: Json | null
+          target_year?: number | null
+          updated_at?: string
+          user_id: string
+          values?: string[] | null
+          vision_text: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          ideal_routines?: Json | null
+          target_year?: number | null
+          updated_at?: string
+          user_id?: string
+          values?: string[] | null
+          vision_text?: string
+        }
+        Relationships: []
+      }
       habit_logs: {
         Row: {
           completed_at: string
@@ -225,6 +297,84 @@ export type Database = {
           title?: string
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      life_roadmap: {
+        Row: {
+          category: string | null
+          color: string | null
+          created_at: string
+          description: string | null
+          id: string
+          item_type: string
+          status: string
+          target_date: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category?: string | null
+          color?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          item_type?: string
+          status?: string
+          target_date: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string | null
+          color?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          item_type?: string
+          status?: string
+          target_date?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      life_templates: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          id: string
+          is_system: boolean
+          name: string
+          template_data: Json
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_system?: boolean
+          name: string
+          template_data?: Json
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_system?: boolean
+          name?: string
+          template_data?: Json
+          updated_at?: string
+          user_id?: string | null
         }
         Relationships: []
       }
