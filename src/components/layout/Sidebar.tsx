@@ -15,6 +15,7 @@ import {
   Sparkles,
   Users,
   Heart,
+  Clock,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -24,6 +25,7 @@ const navItems = [
   { to: '/habits', icon: Target, label: 'Habits' },
   { to: '/expenses', icon: DollarSign, label: 'Expenses' },
   { to: '/wellness', icon: Heart, label: 'Wellness' },
+  { to: '/time', icon: Clock, label: 'Time' },
   { to: '/analytics', icon: BarChart3, label: 'Analytics' },
   { to: '/coach', icon: Sparkles, label: 'AI Coach' },
   { to: '/teams', icon: Users, label: 'Teams' },

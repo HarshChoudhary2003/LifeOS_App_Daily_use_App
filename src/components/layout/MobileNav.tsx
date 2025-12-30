@@ -6,14 +6,15 @@ import {
   DollarSign,
   Sparkles,
   Heart,
+  Clock,
 } from 'lucide-react';
 
 const navItems = [
   { to: '/dashboard', icon: LayoutDashboard, label: 'Home' },
   { to: '/tasks', icon: CheckSquare, label: 'Tasks' },
+  { to: '/time', icon: Clock, label: 'Time' },
   { to: '/wellness', icon: Heart, label: 'Wellness' },
   { to: '/coach', icon: Sparkles, label: 'Coach' },
-  { to: '/expenses', icon: DollarSign, label: 'Money' },
 ];
 
 export function MobileNav() {
