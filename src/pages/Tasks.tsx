@@ -114,34 +114,35 @@ export default function Tasks() {
   });
 
   const pendingCount = tasks.filter(t => t.status === 'pending').length;
+  const completedCount = tasks.filter(t => t.status === 'completed').length;
 
   return (
     <div className="space-y-4 sm:space-y-6 animate-fade-in">
       <PageHeader
         title="Tasks"
-        description={`${pendingCount} pending task${pendingCount !== 1 ? 's' : ''}`}
+        description={pendingCount === 0 ? "All done! Take a break." : `${pendingCount} thing${pendingCount !== 1 ? 's' : ''} to finish`}
         action={
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <DialogTrigger asChild>
               <Button className="w-full sm:w-auto">
                 <Plus className="mr-2 h-4 w-4" />
-                Add Task
+                <span className="hidden sm:inline">Add Task</span>
+                <span className="sm:hidden">Add</span>
               </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-md mx-4 sm:mx-auto">
+            <DialogContent>
               <DialogHeader>
-                <DialogTitle>New Task</DialogTitle>
+                <DialogTitle>What would you like to finish?</DialogTitle>
               </DialogHeader>
               <div className="space-y-4 pt-4">
                 <div className="space-y-2">
-                  <Label htmlFor="title">Title</Label>
+                  <Label htmlFor="title">Task</Label>
                   <Input
                     id="title"
-                    placeholder="What needs to be done?"
+                    placeholder="e.g., Finish the report by Friday"
                     value={newTask.title}
                     onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
                     onKeyDown={(e) => e.key === 'Enter' && createTask()}
-                    className="h-11 sm:h-10"
                   />
                 </div>
                 <div className="space-y-2">
@@ -150,7 +151,7 @@ export default function Tasks() {
                     value={newTask.category}
                     onValueChange={(value) => setNewTask({ ...newTask, category: value })}
                   >
-                    <SelectTrigger className="h-11 sm:h-10">
+                    <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -162,8 +163,8 @@ export default function Tasks() {
                     </SelectContent>
                   </Select>
                 </div>
-                <Button onClick={createTask} className="w-full h-11 sm:h-10">
-                  Create Task
+                <Button onClick={createTask} className="w-full">
+                  Save Task
                 </Button>
               </div>
             </DialogContent>
@@ -233,12 +234,12 @@ export default function Tasks() {
       ) : (
         <EmptyState
           icon={CheckSquare}
-          title="No tasks yet"
-          description="Create your first task to get started"
+          title="Nothing here yet"
+          description="Add something you'd like to finish today"
           action={
             <Button onClick={() => setDialogOpen(true)} className="w-full sm:w-auto">
               <Plus className="mr-2 h-4 w-4" />
-              Add Task
+              Add Your First Task
             </Button>
           }
         />

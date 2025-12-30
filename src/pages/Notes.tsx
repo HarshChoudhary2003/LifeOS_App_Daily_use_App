@@ -121,31 +121,32 @@ export default function Notes() {
   );
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-4 sm:space-y-6 animate-fade-in">
       <PageHeader
         title="Notes"
-        description={`${notes.length} note${notes.length !== 1 ? 's' : ''}`}
+        description={notes.length === 0 ? "Capture your thoughts" : `${notes.length} note${notes.length !== 1 ? 's' : ''} saved`}
         action={
           <Dialog open={dialogOpen} onOpenChange={(open) => {
             if (!open) closeDialog();
             else setDialogOpen(true);
           }}>
             <DialogTrigger asChild>
-              <Button>
+              <Button className="w-full sm:w-auto">
                 <Plus className="mr-2 h-4 w-4" />
-                New Note
+                <span className="hidden sm:inline">New Note</span>
+                <span className="sm:hidden">Add</span>
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-lg">
+            <DialogContent>
               <DialogHeader>
-                <DialogTitle>{editingNote ? 'Edit Note' : 'New Note'}</DialogTitle>
+                <DialogTitle>{editingNote ? 'Edit Note' : 'Write Something'}</DialogTitle>
               </DialogHeader>
               <div className="space-y-4 pt-4">
                 <div className="space-y-2">
                   <Label htmlFor="title">Title</Label>
                   <Input
                     id="title"
-                    placeholder="Note title"
+                    placeholder="Give it a name..."
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   />
@@ -154,10 +155,10 @@ export default function Notes() {
                   <Label htmlFor="content">Content</Label>
                   <Textarea
                     id="content"
-                    placeholder="Write your note..."
+                    placeholder="What's on your mind?"
                     value={formData.content}
                     onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                    rows={8}
+                    rows={6}
                     className="resize-none"
                   />
                 </div>
@@ -167,7 +168,7 @@ export default function Notes() {
                   </div>
                 )}
                 <Button onClick={saveNote} className="w-full">
-                  {editingNote ? 'Update Note' : 'Create Note'}
+                  {editingNote ? 'Save Changes' : 'Save Note'}
                 </Button>
               </div>
             </DialogContent>
@@ -248,18 +249,18 @@ export default function Notes() {
       ) : search ? (
         <EmptyState
           icon={Search}
-          title="No results"
+          title="Nothing found"
           description={`No notes matching "${search}"`}
         />
       ) : (
         <EmptyState
           icon={FileText}
-          title="No notes yet"
-          description="Create your first note to get started"
+          title="Your thoughts, organized"
+          description="Start capturing ideas, thoughts, and anything you want to remember"
           action={
-            <Button onClick={() => setDialogOpen(true)}>
+            <Button onClick={() => setDialogOpen(true)} className="w-full sm:w-auto">
               <Plus className="mr-2 h-4 w-4" />
-              New Note
+              Write Your First Note
             </Button>
           }
         />

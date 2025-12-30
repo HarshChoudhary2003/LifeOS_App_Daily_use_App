@@ -168,40 +168,41 @@ export default function Learning() {
     : 0;
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-4 sm:space-y-6 animate-fade-in">
       <PageHeader
         title="Learning"
-        description={`${goals.length} goal${goals.length !== 1 ? 's' : ''}`}
+        description={goals.length === 0 ? "What do you want to learn?" : `${activeGoals.length} active goal${activeGoals.length !== 1 ? 's' : ''}`}
         action={
           <Dialog open={dialogOpen} onOpenChange={(open) => {
             if (!open) closeDialog();
             else setDialogOpen(true);
           }}>
             <DialogTrigger asChild>
-              <Button>
+              <Button className="w-full sm:w-auto">
                 <Plus className="mr-2 h-4 w-4" />
-                New Goal
+                <span className="hidden sm:inline">New Goal</span>
+                <span className="sm:hidden">Add</span>
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-lg">
+            <DialogContent>
               <DialogHeader>
-                <DialogTitle>{editingGoal ? 'Edit Goal' : 'New Learning Goal'}</DialogTitle>
+                <DialogTitle>{editingGoal ? 'Edit Goal' : 'What do you want to learn?'}</DialogTitle>
               </DialogHeader>
               <div className="space-y-4 pt-4">
                 <div className="space-y-2">
-                  <Label htmlFor="title">What do you want to learn?</Label>
+                  <Label htmlFor="title">Learning goal</Label>
                   <Input
                     id="title"
-                    placeholder="e.g., Learn TypeScript basics"
+                    placeholder="e.g., Learn to play guitar"
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="description">Details (optional)</Label>
+                  <Label htmlFor="description">Notes (optional)</Label>
                   <Textarea
                     id="description"
-                    placeholder="Resources, milestones, notes..."
+                    placeholder="Resources, milestones, or anything helpful..."
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                     rows={3}
@@ -209,7 +210,7 @@ export default function Learning() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="target_date">Target Date (optional)</Label>
+                  <Label htmlFor="target_date">Target date (optional)</Label>
                   <Input
                     id="target_date"
                     type="date"
@@ -227,7 +228,7 @@ export default function Learning() {
                   />
                 </div>
                 <Button onClick={saveGoal} className="w-full">
-                  {editingGoal ? 'Update Goal' : 'Create Goal'}
+                  {editingGoal ? 'Save Changes' : 'Start Learning'}
                 </Button>
               </div>
             </DialogContent>
@@ -239,24 +240,24 @@ export default function Learning() {
       {goals.length > 0 && (
         <div className="grid gap-3 grid-cols-3">
           <Card className="glass-card">
-            <CardContent className="p-4 text-center">
-              <Target className="h-5 w-5 mx-auto mb-1 text-accent" />
-              <p className="text-2xl font-semibold">{activeGoals.length}</p>
-              <p className="text-xs text-muted-foreground">Active</p>
+            <CardContent className="p-3 sm:p-4 text-center">
+              <Target className="h-4 w-4 sm:h-5 sm:w-5 mx-auto mb-1 text-accent" />
+              <p className="text-xl sm:text-2xl font-semibold">{activeGoals.length}</p>
+              <p className="text-[10px] sm:text-xs text-muted-foreground">Active</p>
             </CardContent>
           </Card>
           <Card className="glass-card">
-            <CardContent className="p-4 text-center">
-              <TrendingUp className="h-5 w-5 mx-auto mb-1 text-warning" />
-              <p className="text-2xl font-semibold">{averageProgress}%</p>
-              <p className="text-xs text-muted-foreground">Avg Progress</p>
+            <CardContent className="p-3 sm:p-4 text-center">
+              <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 mx-auto mb-1 text-warning" />
+              <p className="text-xl sm:text-2xl font-semibold">{averageProgress}%</p>
+              <p className="text-[10px] sm:text-xs text-muted-foreground">Avg Progress</p>
             </CardContent>
           </Card>
           <Card className="glass-card">
-            <CardContent className="p-4 text-center">
-              <CheckCircle2 className="h-5 w-5 mx-auto mb-1 text-success" />
-              <p className="text-2xl font-semibold">{completedGoals.length}</p>
-              <p className="text-xs text-muted-foreground">Completed</p>
+            <CardContent className="p-3 sm:p-4 text-center">
+              <CheckCircle2 className="h-4 w-4 sm:h-5 sm:w-5 mx-auto mb-1 text-success" />
+              <p className="text-xl sm:text-2xl font-semibold">{completedGoals.length}</p>
+              <p className="text-[10px] sm:text-xs text-muted-foreground">Completed</p>
             </CardContent>
           </Card>
         </div>
@@ -332,12 +333,12 @@ export default function Learning() {
       ) : completedGoals.length === 0 ? (
         <EmptyState
           icon={GraduationCap}
-          title="No learning goals yet"
-          description="Start your learning journey by creating your first goal"
+          title="Ready to learn something new?"
+          description="Set a goal for what you'd like to master"
           action={
-            <Button onClick={() => setDialogOpen(true)}>
+            <Button onClick={() => setDialogOpen(true)} className="w-full sm:w-auto">
               <Plus className="mr-2 h-4 w-4" />
-              New Goal
+              Set Your First Goal
             </Button>
           }
         />
