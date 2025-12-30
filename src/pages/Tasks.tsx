@@ -116,19 +116,19 @@ export default function Tasks() {
   const pendingCount = tasks.filter(t => t.status === 'pending').length;
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-4 sm:space-y-6 animate-fade-in">
       <PageHeader
         title="Tasks"
         description={`${pendingCount} pending task${pendingCount !== 1 ? 's' : ''}`}
         action={
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <DialogTrigger asChild>
-              <Button>
+              <Button className="w-full sm:w-auto">
                 <Plus className="mr-2 h-4 w-4" />
                 Add Task
               </Button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="sm:max-w-md mx-4 sm:mx-auto">
               <DialogHeader>
                 <DialogTitle>New Task</DialogTitle>
               </DialogHeader>
@@ -141,6 +141,7 @@ export default function Tasks() {
                     value={newTask.title}
                     onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
                     onKeyDown={(e) => e.key === 'Enter' && createTask()}
+                    className="h-11 sm:h-10"
                   />
                 </div>
                 <div className="space-y-2">
@@ -149,7 +150,7 @@ export default function Tasks() {
                     value={newTask.category}
                     onValueChange={(value) => setNewTask({ ...newTask, category: value })}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger className="h-11 sm:h-10">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -161,7 +162,7 @@ export default function Tasks() {
                     </SelectContent>
                   </Select>
                 </div>
-                <Button onClick={createTask} className="w-full">
+                <Button onClick={createTask} className="w-full h-11 sm:h-10">
                   Create Task
                 </Button>
               </div>
@@ -170,15 +171,15 @@ export default function Tasks() {
         }
       />
 
-      {/* Filters */}
-      <div className="flex gap-2 flex-wrap">
+      {/* Filters - horizontal scroll on mobile */}
+      <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:overflow-visible">
         {['all', 'pending', 'completed', ...categories].map((f) => (
           <Button
             key={f}
             variant={filter === f ? 'secondary' : 'ghost'}
             size="sm"
             onClick={() => setFilter(f)}
-            className="capitalize"
+            className="capitalize shrink-0 h-9"
           >
             {f}
           </Button>
@@ -190,7 +191,7 @@ export default function Tasks() {
         <div className="space-y-3">
           {[1, 2, 3].map((i) => (
             <Card key={i} className="glass-card">
-              <CardContent className="p-4">
+              <CardContent className="p-3 sm:p-4">
                 <div className="h-6 bg-muted/50 rounded animate-pulse" />
               </CardContent>
             </Card>
@@ -200,26 +201,26 @@ export default function Tasks() {
         <div className="space-y-2 stagger-children">
           {filteredTasks.map((task) => (
             <Card key={task.id} className="glass-card hover-lift">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3">
+              <CardContent className="p-3 sm:p-4">
+                <div className="flex items-center gap-2 sm:gap-3">
                   <Checkbox
                     checked={task.status === 'completed'}
                     onCheckedChange={() => toggleTask(task)}
-                    className="shrink-0"
+                    className="shrink-0 h-5 w-5"
                   />
                   <span
                     className={cn(
-                      'flex-1 text-sm',
+                      'flex-1 text-sm min-w-0 truncate',
                       task.status === 'completed' && 'line-through text-muted-foreground'
                     )}
                   >
                     {task.title}
                   </span>
-                  <CategoryBadge category={task.category} />
+                  <CategoryBadge category={task.category} className="hidden sm:flex" />
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="h-8 w-8 text-muted-foreground hover:text-destructive"
+                    className="h-8 w-8 sm:h-9 sm:w-9 text-muted-foreground hover:text-destructive shrink-0"
                     onClick={() => deleteTask(task.id)}
                   >
                     <Trash2 className="h-4 w-4" />
@@ -235,7 +236,7 @@ export default function Tasks() {
           title="No tasks yet"
           description="Create your first task to get started"
           action={
-            <Button onClick={() => setDialogOpen(true)}>
+            <Button onClick={() => setDialogOpen(true)} className="w-full sm:w-auto">
               <Plus className="mr-2 h-4 w-4" />
               Add Task
             </Button>

@@ -190,93 +190,94 @@ export default function Analytics() {
   }
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-4 sm:space-y-6 animate-fade-in">
       <PageHeader
         title="Analytics"
         description="Insights into your productivity and spending"
       />
 
       {/* Stats Grid */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
         <Card className="glass-card">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                <CheckSquare className="h-5 w-5 text-primary" />
+          <CardContent className="p-3 sm:p-4">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-primary/10">
+                <CheckSquare className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
               </div>
-              <div>
-                <p className="text-2xl font-semibold">{stats.weeklyCompletion}%</p>
-                <p className="text-xs text-muted-foreground">Weekly completion</p>
+              <div className="min-w-0">
+                <p className="text-lg sm:text-2xl font-semibold">{stats.weeklyCompletion}%</p>
+                <p className="text-[10px] sm:text-xs text-muted-foreground truncate">Weekly completion</p>
               </div>
             </div>
           </CardContent>
         </Card>
 
         <Card className="glass-card">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
-                <DollarSign className="h-5 w-5 text-accent" />
+          <CardContent className="p-3 sm:p-4">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-accent/10">
+                <DollarSign className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
               </div>
-              <div>
-                <p className="text-2xl font-semibold">${stats.monthlyExpenses.toFixed(0)}</p>
-                <p className="text-xs text-muted-foreground">This month</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="glass-card">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-success/10">
-                <Target className="h-5 w-5 text-success" />
-              </div>
-              <div>
-                <p className="text-2xl font-semibold">{stats.habitStreak}</p>
-                <p className="text-xs text-muted-foreground">Habit days (30d)</p>
+              <div className="min-w-0">
+                <p className="text-lg sm:text-2xl font-semibold">${stats.monthlyExpenses.toFixed(0)}</p>
+                <p className="text-[10px] sm:text-xs text-muted-foreground truncate">This month</p>
               </div>
             </div>
           </CardContent>
         </Card>
 
         <Card className="glass-card">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-info/10">
-                <Calendar className="h-5 w-5 text-info" />
+          <CardContent className="p-3 sm:p-4">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-success/10">
+                <Target className="h-4 w-4 sm:h-5 sm:w-5 text-success" />
               </div>
-              <div>
-                <p className="text-2xl font-semibold">{stats.totalTasks}</p>
-                <p className="text-xs text-muted-foreground">Tasks this week</p>
+              <div className="min-w-0">
+                <p className="text-lg sm:text-2xl font-semibold">{stats.habitStreak}</p>
+                <p className="text-[10px] sm:text-xs text-muted-foreground truncate">Habit days (30d)</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="glass-card">
+          <CardContent className="p-3 sm:p-4">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-info/10">
+                <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-info" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-lg sm:text-2xl font-semibold">{stats.totalTasks}</p>
+                <p className="text-[10px] sm:text-xs text-muted-foreground truncate">Tasks this week</p>
               </div>
             </div>
           </CardContent>
         </Card>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid gap-4 grid-cols-1 lg:grid-cols-2">
         {/* Weekly Tasks Chart */}
         <Card className="glass-card">
-          <CardHeader>
-            <CardTitle className="text-base font-medium flex items-center gap-2">
+          <CardHeader className="px-4 sm:px-6">
+            <CardTitle className="text-sm sm:text-base font-medium flex items-center gap-2">
               <TrendingUp className="h-4 w-4 text-muted-foreground" />
               Weekly Task Activity
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-2 sm:px-6 pb-4">
             {loading ? (
               <div className="h-48 bg-muted/50 rounded animate-pulse" />
             ) : (
               <ResponsiveContainer width="100%" height={200}>
-                <BarChart data={taskData}>
-                  <XAxis dataKey="day" tick={{ fontSize: 12 }} />
-                  <YAxis tick={{ fontSize: 12 }} />
+                <BarChart data={taskData} margin={{ left: -20, right: 10 }}>
+                  <XAxis dataKey="day" tick={{ fontSize: 10 }} tickLine={false} axisLine={false} />
+                  <YAxis tick={{ fontSize: 10 }} tickLine={false} axisLine={false} width={30} />
                   <Tooltip 
                     contentStyle={{ 
                       backgroundColor: 'hsl(var(--card))', 
                       border: '1px solid hsl(var(--border))',
-                      borderRadius: '8px'
+                      borderRadius: '8px',
+                      fontSize: '12px'
                     }}
                   />
                   <Bar dataKey="completed" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} name="Completed" />
@@ -289,25 +290,26 @@ export default function Analytics() {
 
         {/* Monthly Expenses Trend */}
         <Card className="glass-card">
-          <CardHeader>
-            <CardTitle className="text-base font-medium flex items-center gap-2">
+          <CardHeader className="px-4 sm:px-6">
+            <CardTitle className="text-sm sm:text-base font-medium flex items-center gap-2">
               <DollarSign className="h-4 w-4 text-muted-foreground" />
               Monthly Spending Trend
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-2 sm:px-6 pb-4">
             {loading ? (
               <div className="h-48 bg-muted/50 rounded animate-pulse" />
             ) : (
               <ResponsiveContainer width="100%" height={200}>
-                <LineChart data={monthlyData}>
-                  <XAxis dataKey="month" tick={{ fontSize: 12 }} />
-                  <YAxis tick={{ fontSize: 12 }} />
+                <LineChart data={monthlyData} margin={{ left: -20, right: 10 }}>
+                  <XAxis dataKey="month" tick={{ fontSize: 10 }} tickLine={false} axisLine={false} />
+                  <YAxis tick={{ fontSize: 10 }} tickLine={false} axisLine={false} width={40} />
                   <Tooltip 
                     contentStyle={{ 
                       backgroundColor: 'hsl(var(--card))', 
                       border: '1px solid hsl(var(--border))',
-                      borderRadius: '8px'
+                      borderRadius: '8px',
+                      fontSize: '12px'
                     }}
                     formatter={(value: number) => [`$${value.toFixed(2)}`, 'Amount']}
                   />
@@ -316,7 +318,7 @@ export default function Analytics() {
                     dataKey="amount" 
                     stroke="hsl(var(--accent))" 
                     strokeWidth={2}
-                    dot={{ fill: 'hsl(var(--accent))' }}
+                    dot={{ fill: 'hsl(var(--accent))', r: 3 }}
                   />
                 </LineChart>
               </ResponsiveContainer>
@@ -328,44 +330,46 @@ export default function Analytics() {
       {/* Expense Categories */}
       {categoryData.length > 0 && (
         <Card className="glass-card">
-          <CardHeader>
-            <CardTitle className="text-base font-medium">
+          <CardHeader className="px-4 sm:px-6">
+            <CardTitle className="text-sm sm:text-base font-medium">
               Spending by Category
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="flex flex-col sm:flex-row items-center gap-6">
-              <ResponsiveContainer width={200} height={200}>
-                <PieChart>
-                  <Pie
-                    data={categoryData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={50}
-                    outerRadius={80}
-                    paddingAngle={2}
-                    dataKey="value"
-                  >
-                    {categoryData.map((_, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip 
-                    formatter={(value: number) => [`$${value.toFixed(2)}`, '']}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
-              <div className="flex-1 space-y-2">
+          <CardContent className="px-4 sm:px-6 pb-4">
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+              <div className="w-full sm:w-auto flex justify-center">
+                <ResponsiveContainer width={160} height={160} className="sm:w-[200px] sm:h-[200px]">
+                  <PieChart>
+                    <Pie
+                      data={categoryData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={40}
+                      outerRadius={70}
+                      paddingAngle={2}
+                      dataKey="value"
+                    >
+                      {categoryData.map((_, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip 
+                      formatter={(value: number) => [`$${value.toFixed(2)}`, '']}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="flex-1 space-y-2 w-full">
                 {categoryData.map((cat, index) => (
                   <div key={cat.name} className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 min-w-0">
                       <div 
-                        className="h-3 w-3 rounded-full" 
+                        className="h-3 w-3 rounded-full shrink-0" 
                         style={{ backgroundColor: COLORS[index % COLORS.length] }}
                       />
-                      <span className="text-sm">{cat.name}</span>
+                      <span className="text-xs sm:text-sm truncate">{cat.name}</span>
                     </div>
-                    <span className="text-sm font-medium">${cat.value.toFixed(2)}</span>
+                    <span className="text-xs sm:text-sm font-medium shrink-0 ml-2">${cat.value.toFixed(2)}</span>
                   </div>
                 ))}
               </div>
