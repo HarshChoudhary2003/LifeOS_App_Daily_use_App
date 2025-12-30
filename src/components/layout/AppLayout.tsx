@@ -28,13 +28,13 @@ export function AppLayout({ children }: AppLayoutProps) {
   return (
     <div className="flex min-h-screen w-full bg-background">
       {/* Desktop Sidebar */}
-      <aside className="hidden lg:flex">
+      <aside className="hidden lg:flex lg:flex-shrink-0">
         <Sidebar />
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col min-h-screen pb-16 lg:pb-0">
-        <div className="flex-1 container max-w-5xl py-6 lg:py-8">
+      <main className="flex-1 flex flex-col min-h-screen pb-20 lg:pb-0 overflow-x-hidden">
+        <div className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
           {children}
         </div>
       </main>

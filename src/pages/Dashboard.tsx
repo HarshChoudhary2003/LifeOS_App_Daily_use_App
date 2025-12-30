@@ -102,7 +102,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-4 sm:space-y-6 animate-fade-in">
       <PageHeader 
         title={greeting()}
         description="Here's your daily overview"
@@ -113,14 +113,14 @@ export default function Dashboard() {
 
       {/* Focus Message */}
       <Card className="glass-card overflow-hidden">
-        <CardContent className="p-6">
-          <div className="flex items-start gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent/10">
-              <Sparkles className="h-5 w-5 text-accent" />
+        <CardContent className="p-4 sm:p-6">
+          <div className="flex items-start gap-3 sm:gap-4">
+            <div className="flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-lg bg-accent/10">
+              <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
             </div>
-            <div>
-              <p className="text-sm font-medium text-muted-foreground mb-1">Daily Focus</p>
-              <p className="text-foreground leading-relaxed">{focusMessage}</p>
+            <div className="min-w-0 flex-1">
+              <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-1">Daily Focus</p>
+              <p className="text-sm sm:text-base text-foreground leading-relaxed">{focusMessage}</p>
             </div>
           </div>
         </CardContent>
@@ -130,27 +130,28 @@ export default function Dashboard() {
       <SmartInsight />
 
       {/* Weekly Summary + Habits + Learning Row */}
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         <WeeklySummary />
         <HabitStreaks />
         <LearningProgress />
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
         {/* Tasks Overview */}
         <Card className="glass-card">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-base font-medium flex items-center gap-2">
+          <CardHeader className="flex flex-row items-center justify-between pb-2 px-4 sm:px-6 pt-4 sm:pt-6">
+            <CardTitle className="text-sm sm:text-base font-medium flex items-center gap-2">
               <CheckSquare className="h-4 w-4 text-muted-foreground" />
-              Pending Tasks
+              <span className="hidden sm:inline">Pending Tasks</span>
+              <span className="sm:hidden">Tasks</span>
             </CardTitle>
-            <Button variant="ghost" size="sm" asChild>
-              <Link to="/tasks" className="text-xs">
+            <Button variant="ghost" size="sm" asChild className="h-8 text-xs">
+              <Link to="/tasks">
                 View all <ArrowRight className="ml-1 h-3 w-3" />
               </Link>
             </Button>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-4 sm:px-6 pb-4 sm:pb-6">
             {loading ? (
               <div className="space-y-3">
                 {[1, 2, 3].map((i) => (
@@ -162,15 +163,15 @@ export default function Dashboard() {
                 {tasks.map((task) => (
                   <div
                     key={task.id}
-                    className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted/50 transition-smooth"
+                    className="flex items-center gap-2 sm:gap-3 p-2 rounded-lg hover:bg-muted/50 transition-smooth"
                   >
                     <Checkbox
                       checked={false}
                       onCheckedChange={() => toggleTask(task.id)}
                       className="shrink-0"
                     />
-                    <span className="flex-1 text-sm truncate">{task.title}</span>
-                    <CategoryBadge category={task.category} />
+                    <span className="flex-1 text-xs sm:text-sm truncate min-w-0">{task.title}</span>
+                    <CategoryBadge category={task.category} className="hidden sm:flex" />
                   </div>
                 ))}
               </div>
@@ -185,26 +186,26 @@ export default function Dashboard() {
 
         {/* Expenses Overview */}
         <Card className="glass-card">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-base font-medium flex items-center gap-2">
+          <CardHeader className="flex flex-row items-center justify-between pb-2 px-4 sm:px-6 pt-4 sm:pt-6">
+            <CardTitle className="text-sm sm:text-base font-medium flex items-center gap-2">
               <DollarSign className="h-4 w-4 text-muted-foreground" />
               This Month
             </CardTitle>
-            <Button variant="ghost" size="sm" asChild>
-              <Link to="/expenses" className="text-xs">
+            <Button variant="ghost" size="sm" asChild className="h-8 text-xs">
+              <Link to="/expenses">
                 View all <ArrowRight className="ml-1 h-3 w-3" />
               </Link>
             </Button>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-4 sm:px-6 pb-4 sm:pb-6">
             {loading ? (
               <div className="h-16 bg-muted/50 rounded animate-pulse" />
             ) : (
               <div className="py-4">
-                <p className="text-3xl font-semibold tracking-tight">
+                <p className="text-2xl sm:text-3xl font-semibold tracking-tight">
                   ${monthlyExpenses.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                 </p>
-                <p className="text-sm text-muted-foreground mt-1">
+                <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                   Total expenses this month
                 </p>
               </div>

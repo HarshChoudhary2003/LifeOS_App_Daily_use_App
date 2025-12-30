@@ -188,19 +188,19 @@ export default function Habits() {
   const last7Days = getLast7Days();
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-4 sm:space-y-6 animate-fade-in">
       <PageHeader
         title="Habits"
         description="Build consistency with daily habits"
         action={
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <DialogTrigger asChild>
-              <Button>
+              <Button className="w-full sm:w-auto">
                 <Plus className="h-4 w-4 mr-2" />
                 New Habit
               </Button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="sm:max-w-md mx-4 sm:mx-auto">
               <DialogHeader>
                 <DialogTitle>Create New Habit</DialogTitle>
               </DialogHeader>
@@ -211,6 +211,7 @@ export default function Habits() {
                     placeholder="e.g., Morning meditation"
                     value={newHabit.name}
                     onChange={(e) => setNewHabit({ ...newHabit, name: e.target.value })}
+                    className="h-11 sm:h-10"
                   />
                 </div>
                 <div className="space-y-2">
@@ -219,17 +220,18 @@ export default function Habits() {
                     placeholder="Brief description"
                     value={newHabit.description}
                     onChange={(e) => setNewHabit({ ...newHabit, description: e.target.value })}
+                    className="h-11 sm:h-10"
                   />
                 </div>
                 <div className="space-y-2">
                   <Label>Color</Label>
-                  <div className="flex gap-2">
+                  <div className="flex gap-3">
                     {COLORS.map((color) => (
                       <button
                         key={color.name}
                         onClick={() => setNewHabit({ ...newHabit, color: color.name })}
                         className={cn(
-                          'h-8 w-8 rounded-full transition-all',
+                          'h-10 w-10 sm:h-8 sm:w-8 rounded-full transition-all',
                           color.class,
                           newHabit.color === color.name
                             ? 'ring-2 ring-offset-2 ring-primary'
@@ -239,7 +241,7 @@ export default function Habits() {
                     ))}
                   </div>
                 </div>
-                <Button onClick={createHabit} className="w-full">
+                <Button onClick={createHabit} className="w-full h-11 sm:h-10">
                   Create Habit
                 </Button>
               </div>
@@ -252,8 +254,8 @@ export default function Habits() {
         <div className="space-y-3">
           {[1, 2, 3].map((i) => (
             <Card key={i} className="glass-card">
-              <CardContent className="p-4">
-                <div className="h-16 bg-muted/50 rounded animate-pulse" />
+              <CardContent className="p-3 sm:p-4">
+                <div className="h-14 sm:h-16 bg-muted/50 rounded animate-pulse" />
               </CardContent>
             </Card>
           ))}
@@ -265,7 +267,7 @@ export default function Habits() {
           description="Start building good habits by adding your first one"
         />
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-2 sm:space-y-3">
           {habits.map((habit) => {
             const streak = getStreak(habit.id);
             const completedToday = isCompletedToday(habit.id);
@@ -273,30 +275,30 @@ export default function Habits() {
 
             return (
               <Card key={habit.id} className="glass-card group">
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-4">
+                <CardContent className="p-3 sm:p-4">
+                  <div className="flex items-center gap-3 sm:gap-4">
                     {/* Complete button */}
                     <button
                       onClick={() => toggleHabitToday(habit.id)}
                       className={cn(
-                        'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-all',
+                        'flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-xl transition-all',
                         completedToday
                           ? `${colorClass} text-white`
                           : 'border-2 border-dashed border-muted-foreground/30 hover:border-primary hover:bg-primary/5'
                       )}
                     >
                       {completedToday ? (
-                        <Check className="h-6 w-6" />
+                        <Check className="h-5 w-5 sm:h-6 sm:w-6" />
                       ) : (
-                        <Plus className="h-5 w-5 text-muted-foreground" />
+                        <Plus className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground" />
                       )}
                     </button>
 
                     {/* Habit info */}
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-medium truncate">{habit.name}</h3>
+                      <h3 className="font-medium truncate text-sm sm:text-base">{habit.name}</h3>
                       {habit.description && (
-                        <p className="text-sm text-muted-foreground truncate">
+                        <p className="text-xs sm:text-sm text-muted-foreground truncate">
                           {habit.description}
                         </p>
                       )}
@@ -304,14 +306,14 @@ export default function Habits() {
 
                     {/* Streak */}
                     {streak > 0 && (
-                      <div className="flex items-center gap-1 text-accent">
+                      <div className="flex items-center gap-1 text-accent shrink-0">
                         <Flame className="h-4 w-4" />
                         <span className="text-sm font-medium">{streak}</span>
                       </div>
                     )}
 
-                    {/* Mini calendar - last 7 days */}
-                    <div className="hidden sm:flex items-center gap-1">
+                    {/* Mini calendar - last 7 days (hidden on mobile) */}
+                    <div className="hidden md:flex items-center gap-1">
                       {last7Days.map((date) => {
                         const completed = logs.some(
                           (l) => l.habit_id === habit.id && l.completed_at === date
@@ -328,11 +330,11 @@ export default function Habits() {
                       })}
                     </div>
 
-                    {/* Delete button */}
+                    {/* Delete button - always visible on mobile */}
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="sm:opacity-0 sm:group-hover:opacity-100 transition-opacity h-9 w-9 shrink-0"
                       onClick={() => deleteHabit(habit.id)}
                     >
                       <Trash2 className="h-4 w-4 text-muted-foreground" />
@@ -348,10 +350,10 @@ export default function Habits() {
       {/* Stats summary */}
       {habits.length > 0 && (
         <Card className="glass-card">
-          <CardContent className="p-4">
+          <CardContent className="p-3 sm:p-4">
             <div className="flex items-center gap-2 text-muted-foreground">
-              <Calendar className="h-4 w-4" />
-              <span className="text-sm">
+              <Calendar className="h-4 w-4 shrink-0" />
+              <span className="text-xs sm:text-sm">
                 {logs.filter((l) => l.completed_at === new Date().toISOString().split('T')[0]).length} of {habits.length} completed today
               </span>
             </div>

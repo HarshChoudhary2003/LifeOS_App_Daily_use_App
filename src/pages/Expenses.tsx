@@ -116,19 +116,19 @@ export default function Expenses() {
     .reduce((sum, e) => sum + Number(e.amount), 0);
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-4 sm:space-y-6 animate-fade-in">
       <PageHeader
         title="Expenses"
         description="Track your spending"
         action={
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <DialogTrigger asChild>
-              <Button>
+              <Button className="w-full sm:w-auto">
                 <Plus className="mr-2 h-4 w-4" />
                 Add Expense
               </Button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="sm:max-w-md mx-4 sm:mx-auto">
               <DialogHeader>
                 <DialogTitle>New Expense</DialogTitle>
               </DialogHeader>
@@ -143,6 +143,7 @@ export default function Expenses() {
                     min="0"
                     value={newExpense.amount}
                     onChange={(e) => setNewExpense({ ...newExpense, amount: e.target.value })}
+                    className="h-11 sm:h-10"
                   />
                 </div>
                 <div className="space-y-2">
@@ -151,7 +152,7 @@ export default function Expenses() {
                     value={newExpense.category}
                     onValueChange={(value) => setNewExpense({ ...newExpense, category: value })}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger className="h-11 sm:h-10">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -173,7 +174,7 @@ export default function Expenses() {
                     rows={2}
                   />
                 </div>
-                <Button onClick={createExpense} className="w-full">
+                <Button onClick={createExpense} className="w-full h-11 sm:h-10">
                   Add Expense
                 </Button>
               </div>
@@ -184,9 +185,9 @@ export default function Expenses() {
 
       {/* Monthly Summary */}
       <Card className="glass-card">
-        <CardContent className="p-6">
-          <p className="text-sm font-medium text-muted-foreground mb-1">This Month</p>
-          <p className="text-3xl font-semibold tracking-tight">
+        <CardContent className="p-4 sm:p-6">
+          <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-1">This Month</p>
+          <p className="text-2xl sm:text-3xl font-semibold tracking-tight">
             ${monthlyTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
           </p>
         </CardContent>
@@ -197,7 +198,7 @@ export default function Expenses() {
         <div className="space-y-3">
           {[1, 2, 3].map((i) => (
             <Card key={i} className="glass-card">
-              <CardContent className="p-4">
+              <CardContent className="p-3 sm:p-4">
                 <div className="h-12 bg-muted/50 rounded animate-pulse" />
               </CardContent>
             </Card>
@@ -207,27 +208,27 @@ export default function Expenses() {
         <div className="space-y-2 stagger-children">
           {expenses.map((expense) => (
             <Card key={expense.id} className="glass-card hover-lift">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-4">
+              <CardContent className="p-3 sm:p-4">
+                <div className="flex items-center gap-2 sm:gap-4">
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <span className="font-medium">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="font-medium text-sm sm:text-base">
                         ${Number(expense.amount).toLocaleString('en-US', { minimumFractionDigits: 2 })}
                       </span>
-                      <span className="text-sm text-muted-foreground">•</span>
-                      <span className="text-sm text-muted-foreground">{expense.category}</span>
+                      <span className="text-xs sm:text-sm text-muted-foreground hidden sm:inline">•</span>
+                      <span className="text-xs sm:text-sm text-muted-foreground">{expense.category}</span>
                     </div>
                     {expense.note && (
-                      <p className="text-sm text-muted-foreground truncate mt-0.5">{expense.note}</p>
+                      <p className="text-xs sm:text-sm text-muted-foreground truncate mt-0.5">{expense.note}</p>
                     )}
                   </div>
-                  <span className="text-xs text-muted-foreground shrink-0">
+                  <span className="text-[10px] sm:text-xs text-muted-foreground shrink-0">
                     {format(new Date(expense.created_at), 'MMM d')}
                   </span>
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="h-8 w-8 text-muted-foreground hover:text-destructive shrink-0"
+                    className="h-8 w-8 sm:h-9 sm:w-9 text-muted-foreground hover:text-destructive shrink-0"
                     onClick={() => deleteExpense(expense.id)}
                   >
                     <Trash2 className="h-4 w-4" />
@@ -243,7 +244,7 @@ export default function Expenses() {
           title="No expenses yet"
           description="Start tracking your spending"
           action={
-            <Button onClick={() => setDialogOpen(true)}>
+            <Button onClick={() => setDialogOpen(true)} className="w-full sm:w-auto">
               <Plus className="mr-2 h-4 w-4" />
               Add Expense
             </Button>
