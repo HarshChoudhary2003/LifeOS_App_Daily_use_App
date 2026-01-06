@@ -284,7 +284,7 @@ This project is open source and available under the MIT License. See the LICENSE
 
 **Harsh Choudhary**
 - GitHub: [@HarshChoudhary2003](https://github.com/HarshChoudhary2003)
-- Email: harsh.choudhary@example.com
+- Email: hc504360@gmail.com 
 
 ## 🙏 Acknowledgments
 
@@ -300,4 +300,4 @@ For support, please open an issue on [GitHub Issues](https://github.com/HarshCho
 
 ---
 
-**Made with ❤️ by Harsh Choudhary**
+**Made by Harsh Choudhary**
